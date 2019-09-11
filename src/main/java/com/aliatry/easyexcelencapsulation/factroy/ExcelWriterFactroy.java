@@ -11,6 +11,7 @@ import java.util.List;
 
 /**
  * Excel导出工厂
+ * @author Simon
  */
 public class ExcelWriterFactroy extends ExcelWriter {
     private OutputStream outputStream;

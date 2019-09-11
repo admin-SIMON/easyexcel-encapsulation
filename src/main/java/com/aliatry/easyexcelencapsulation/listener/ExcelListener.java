@@ -8,11 +8,15 @@ import java.util.List;
 
 /**
  * Excel监听器
+ *
+ * @author Simon
  */
 public class ExcelListener extends AnalysisEventListener {
 
-    // 自定义用于暂时存储data
-    // 可以通过实例获取该值
+    /**
+     * 自定义用于暂时存储data
+     * 可以通过实例获取该值
+     */
     private List<Object> data = new ArrayList<>();
 
     /**

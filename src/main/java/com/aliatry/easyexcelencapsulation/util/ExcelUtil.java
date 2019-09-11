@@ -12,10 +12,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
  * Excel工具类
+ *
+ * @author Simon
  */
 public class ExcelUtil {
     /**
@@ -119,7 +122,7 @@ public class ExcelUtil {
             if (!dbfFile.exists() || dbfFile.isDirectory()) {
                 dbfFile.createNewFile();
             }
-            fileName = new String(filePath.getBytes(), "ISO-8859-1");
+            fileName = new String(filePath.getBytes(), StandardCharsets.ISO_8859_1);
             response.addHeader("Content-Disposition", "filename=" + fileName);
             return response.getOutputStream();
         } catch (IOException e) {
@@ -136,7 +139,10 @@ public class ExcelUtil {
     private static ExcelReader getReader(MultipartFile excel,
                                          ExcelListener excelListener) {
         String filename = excel.getOriginalFilename();
-        if (filename == null || (!filename.toLowerCase().endsWith(ExcelTypeEnum.XLS.getValue()) && !filename.toLowerCase().endsWith(ExcelTypeEnum.XLSX.getValue()))) {
+        boolean b = null == filename ||
+                (!filename.toLowerCase().endsWith(ExcelTypeEnum.XLS.getValue())
+                        && !filename.toLowerCase().endsWith(ExcelTypeEnum.XLSX.getValue()));
+        if (b) {
             throw new ExcelException("文件格式错误!");
         }
         InputStream inputStream;

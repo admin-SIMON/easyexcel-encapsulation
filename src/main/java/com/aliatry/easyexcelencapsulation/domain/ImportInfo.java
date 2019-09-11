@@ -5,6 +5,7 @@ import com.alibaba.excel.metadata.BaseRowModel;
 
 /**
  * 导入 Excel 时使用的映射实体类,Excel 模型
+ * @author Simon
  */
 public class ImportInfo extends BaseRowModel {
     @ExcelProperty(index = 0)
