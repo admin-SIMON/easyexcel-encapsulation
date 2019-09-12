@@ -15,6 +15,7 @@ import java.util.List;
 
 /**
  * Excel控制层
+ *
  * @author Simon
  */
 @RestController
@@ -28,7 +29,7 @@ public class ExcelController {
      * @param headLineNum 表头行数，默认为1
      */
     @RequestMapping(value = "readExcel", method = RequestMethod.POST)
-    public Object readExcel(MultipartFile excel, int sheetNo,
+    public Object readExcel(@RequestParam(required = true) MultipartFile excel, @RequestParam(defaultValue = "1") int sheetNo,
                             @RequestParam(defaultValue = "1") int headLineNum) {
         return ExcelUtil.readExcel(excel, new ImportInfo(), sheetNo, headLineNum);
     }
@@ -51,7 +52,7 @@ public class ExcelController {
      * @param excel 文件
      */
     @RequestMapping(value = "readExcelWithSheets", method = RequestMethod.POST)
-    public Object readExcelWithSheets(MultipartFile excel) {
+    public Object readExcelWithSheets(@RequestParam(required = true) MultipartFile excel) {
         return ExcelUtil.readExcel(excel, new ImportInfo());
     }
 
